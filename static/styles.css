@@ -1,0 +1,19 @@
+body {
+    background: url("background.jpg") no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.white-text {
+    color: white;
+}
+
+.prediction-text {
+    color: white;
+}
+
+.mt-2 {
+    color: white;
+}

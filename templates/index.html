@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>School Subject Classifier</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="{{ url_for('static', filename='styles.css') }}" rel="stylesheet">
+</head>
+<body onload="clearForm()">
+    <div class="container mt-4">
+        <h1 class="white-text">School Subject Classifier</h1>
+
+        <!-- Description -->
+        <div class="mt-4 white-text">
+            <p>This app predicts the school subject based on the input text. The text is preprocessed and then classified using a trained model. 
+            The model can predict one of the following four categories: Physics, Biology, History, and Computer Science.</p>
+        </div>
+
+
+        <form id="predictForm" method="POST" action="/predict" onsubmit="clearPredictionResult(); showLoadingSpinner();">
+            <div class="form-group">
+                <textarea class="form-control" name="text" id="text" rows="5" placeholder="Enter text here..." value="{{ input_text if input_text else '' }}">{{ input_text if input_text else '' }}</textarea>
+            </div>
+            <button type="submit" id="predictButton" class="btn btn-primary">Predict</button>
+            <button type="button" id="clearButton" class="btn btn-secondary" onclick="clearTextArea()">Clear</button>
+        </form>
+
+        <!-- Loading Spinner -->
+        <div id="loadingSpinner" class="mt-2" style="display: none;">
+            <div class="spinner-border text-primary" role="status">
+                <span class="sr-only">Predicting...</span>
+            </div>
+            <p class="mt-2">Predicting...</p>
+        </div>
+
+        <br>
+
+        <!-- Prediction Text -->
+        <div id="result">
+            {% if prediction_text %}
+            <p class="lead prediction-text">{{ prediction_text }}</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and JQuery -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <!-- Custom JS -->
+    <script src="{{ url_for('static', filename='scripts.js') }}"></script>
+    <script>
+        function showLoadingSpinner() {
+            document.getElementById("loadingSpinner").style.display = "block";
+        }
+    </script>
+</body>
+</html>
